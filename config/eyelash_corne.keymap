@@ -56,7 +56,22 @@
 
         softoff {
             bindings = <&soft_off>;
-            key-positions = <1 15 29>;
+            key-positions = <0 43 46 41>;
+        };
+
+        sys_reset {
+            bindings = <&sys_reset>;
+            key-positions = <43 46 28 13>;
+        };
+
+        studio_unlock {
+            bindings = <&studio_unlock>;
+            key-positions = <12 43 46 28>;
+        };
+
+        bootloader {
+            bindings = <&bootloader>;
+            key-positions = <46 43 28 27>;
         };
     };
 
