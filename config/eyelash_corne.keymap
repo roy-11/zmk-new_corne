@@ -58,26 +58,37 @@
         softoff {
             bindings = <&soft_off>;
             key-positions = <0 43 46 41>;
+            layers = <3>;
         };
 
         sys_reset {
             bindings = <&sys_reset>;
             key-positions = <43 46 28 13>;
+            layers = <3>;
         };
 
         studio_unlock {
             bindings = <&studio_unlock>;
             key-positions = <12 43 46 28>;
+            layers = <3>;
         };
 
         bootloader {
             bindings = <&bootloader>;
             key-positions = <46 43 28 27>;
+            layers = <3>;
         };
 
         toggle_usb_blue {
             bindings = <&out OUT_TOG>;
             key-positions = <41 46 43 28>;
+            layers = <3>;
+        };
+
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <13 12>;
+            layers = <0>;
         };
     };
 
@@ -108,9 +119,9 @@
         lower_layer {
             display-name = "NUMBER";
             bindings = <
-&kp TAB         &kp N1           &kp N2           &kp N3                            &kp N4                            &kp N5                                              &mmv MOVE_UP                     &kp N6         &kp N7         &kp N8         &kp N9     &kp N0  &kp BSPC
-&td0            &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2                      &bt BT_SEL 3                      &bt BT_CLR                          &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT  &none   &none
-&kp LEFT_SHIFT  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_COLOR_HSB(148,30,28)  &rgb_ug RGB_COLOR_HSB(220,33,42)  &rgb_ug RGB_TOG  &rgb_ug RGB_TOG                    &mmv MOVE_DOWN                   &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP    &kp END    &none   &kp RIGHT_SHIFT
+&kp TAB         &kp N1           &kp N2           &kp N3                            &kp N4                            &kp N5                                              &mmv MOVE_UP                     &kp N6         &kp N7         &kp N8         &kp N9     &kp N0              &kp BSPC
+&td0            &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2                      &bt BT_SEL 3                      &bt BT_CLR                          &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT  &copy_mode_in_tmux  &kp DEL
+&kp LEFT_SHIFT  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_COLOR_HSB(148,30,28)  &rgb_ug RGB_COLOR_HSB(220,33,42)  &rgb_ug RGB_TOG  &rgb_ug RGB_TOG                    &mmv MOVE_DOWN                   &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP    &kp END    &none               &kp INSERT
                                                   &kp LEFT_GUI                      &mo 1                             &kp SPACE                                                                            &kp LG(SPACE)  &mo 2          &kp RIGHT_ALT
             >;
 
@@ -132,10 +143,10 @@
         layer_3 {
             display-name = "Fn";
             bindings = <
-&none  &kp LS(LG(NUMBER_1))  &kp LS(LG(NUMBER_2))  &kp LS(LG(NUMBER_3))  &kp LS(LG(NUMBER_4))  &kp LS(LG(N5))                                &mmv MOVE_UP                     &kp C_BRI_DEC  &kp C_BRI_INC  &kp K_MUTE         &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &none
-&none  &kp F1                &kp F2                &kp F3                &kp F4                &kp F5                        &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp F6         &kp F7         &kp F8             &kp F9             &kp F10          &none
-&none  &kp F11               &kp F12               &kp F13               &kp F14               &kp F15         &kp C_MUTE                    &mmv MOVE_DOWN                   &kp F16        &kp F17        &kp F18            &kp F19            &kp F20          &none
-                                                   &kp LEFT_META         &mo 1                 &kp SPACE                                                                      &kp LG(SPACE)  &mo 2          &kp RIGHT_CONTROL
+&caps_word        &kp LS(LG(NUMBER_1))  &kp LS(LG(NUMBER_2))  &kp LS(LG(NUMBER_3))  &kp LS(LG(NUMBER_4))  &kp LS(LG(N5))                                &mmv MOVE_UP                     &kp C_BRI_DEC  &kp C_BRI_INC  &kp K_MUTE     &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &key_repeat
+&sk LEFT_CONTROL  &kp F1                &kp F2                &kp F3                &kp F4                &kp F5                        &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp F6         &kp F7         &kp F8         &kp F9             &kp F10          &sk RIGHT_CONTROL
+&sk LEFT_SHIFT    &kp F11               &kp F12               &kp F13               &kp F14               &kp F15         &kp C_MUTE                    &mmv MOVE_DOWN                   &kp F16        &kp F17        &kp F18        &kp F19            &kp F20          &sk RIGHT_SHIFT
+                                                              &sk LEFT_GUI          &mo 1                 &kp SPACE                                                                      &kp LG(SPACE)  &mo 2          &sk RIGHT_ALT
             >;
 
             sensor-bindings = <&scroll_encoder>;
