@@ -6,6 +6,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
@@ -72,6 +73,11 @@
         bootloader {
             bindings = <&bootloader>;
             key-positions = <46 43 28 27>;
+        };
+
+        toggle_usb_blue {
+            bindings = <&out OUT_TOG>;
+            key-positions = <41 46 43 28>;
         };
     };
 
