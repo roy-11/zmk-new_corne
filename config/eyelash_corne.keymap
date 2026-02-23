@@ -61,6 +61,15 @@
         };
     };
 
+   macros {
+        copy_mode_in_tmux: copy_mode_in_tmux {
+            compatible = "zmk,behavior-macro";
+            label = "COPY_MODE_IN_TMUX";
+            #binding-cells = <0>;
+            bindings = <&kp LC(B) &kp LEFT_BRACKET>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
