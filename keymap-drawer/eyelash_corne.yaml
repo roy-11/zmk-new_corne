@@ -13,7 +13,7 @@ layers:
   - I
   - O
   - P
-  - {t: '$$mdi:backspace$$', type: backspace}
+  - {t: '$$mdi:backspace$$', s: '$$mdi:keyboard-esc$$'}
   - $$mdi:apple-keyboard-control$$
   - A
   - S
@@ -160,7 +160,7 @@ layers:
   - MUTE
   - $$mdi:volume-low$$
   - $$mdi:volume-high$$
-  - '&key_repeat'
+  - EP TOG
   - {t: '$$mdi:apple-keyboard-control$$', h: '$$mdi:gesture-tap-hold$$'}
   - F1
   - F2
