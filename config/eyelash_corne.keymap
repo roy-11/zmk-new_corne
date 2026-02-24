@@ -30,12 +30,6 @@
 
 / {
     behaviors {
-        td0: td0 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "Shift/Caps Lock Tap Dance";
-            #binding-cells = <0>;
-            bindings = <&kp LEFT_SHIFT>, <&kp CAPS>;
-        };
     };
 
     rgb_encoder: rgb_encoder {
@@ -57,7 +51,41 @@
 
         softoff {
             bindings = <&soft_off>;
-            key-positions = <1 15 29>;
+            key-positions = <0 43 46 41>;
+            layers = <3>;
+        };
+
+        sys_reset {
+            bindings = <&sys_reset>;
+            key-positions = <43 46 28 13>;
+            layers = <3>;
+        };
+
+        studio_unlock {
+            bindings = <&studio_unlock>;
+            key-positions = <12 43 46 28>;
+            layers = <3>;
+        };
+
+        bootloader {
+            bindings = <&bootloader>;
+            key-positions = <46 43 28 27>;
+            layers = <3>;
+        };
+
+        toggle_usb_blue {
+            bindings = <&out OUT_TOG>;
+            key-positions = <41 46 43 28>;
+            layers = <3>;
+        };
+    };
+
+    macros {
+        copy_mode_in_tmux: copy_mode_in_tmux {
+            compatible = "zmk,behavior-macro";
+            label = "COPY_MODE_IN_TMUX";
+            #binding-cells = <0>;
+            bindings = <&kp LC(B) &kp LEFT_BRACKET>;
         };
     };
 
@@ -67,10 +95,10 @@
         default_layer {
             display-name = "QWERTY";
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T                               &kp UP                &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&td0       &kp A  &kp S  &kp D     &kp F  &kp G                     &kp LEFT  &kp ENTER  &kp RIGHT  &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LCTRL  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp SPACE              &kp DOWN              &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LGUI  &mo 1  &lt 3 SPACE                                               &lt 3 ENTER  &mo 2  &kp RALT
+&kp TAB           &kp Q  &kp W  &kp E     &kp R  &kp T                                    &mmv MOVE_UP                     &kp Y       &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp LEFT_CONTROL  &kp A  &kp S  &kp D     &kp F  &kp G                    &mmv MOVE_LEFT  &kp ENTER       &mmv MOVE_RIGHT  &kp H       &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LEFT_SHIFT    &kp Z  &kp X  &kp C     &kp V  &kp B      &kp C_MUTE                    &mmv MOVE_DOWN                   &kp N       &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RIGHT_SHIFT
+                                &kp LGUI  &mo 1  &kp SPACE                                                                 &kp RETURN  &mo 2  &kp RALT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
@@ -79,22 +107,22 @@
         lower_layer {
             display-name = "NUMBER";
             bindings = <
-&trans  &kp N1           &kp N2          &kp N3        &kp N4        &kp N5                                         &mmv MOVE_UP                     &kp N6           &kp N7           &kp N8           &kp N9           &kp N0    &kp BSPC
-&trans  &bt BT_CLR_ALL   &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3                   &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &kp HOME  &kp PG_UP
-&trans  &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &trans        &trans        &rgb_ug RGB_EFF  &kp C_MUTE                    &mmv MOVE_DOWN                   &rgb_ug RGB_EFR  &rgb_ug RGB_SPI  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp END   &kp PG_DN
-                                         &trans        &trans        &trans                                                                          &kp INS          &kp DEL          &trans
+&kp TAB           &kp N1           &kp N2           &kp N3                            &kp N4                            &kp N5                                              &mmv MOVE_UP                     &kp N6         &kp N7         &kp N8         &kp N9     &kp N0              &kp BSPC
+&kp LEFT_CONTROL  &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2                      &bt BT_SEL 3                      &bt BT_CLR                          &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT  &copy_mode_in_tmux  &kp DEL
+&kp LEFT_SHIFT    &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_COLOR_HSB(148,30,28)  &rgb_ug RGB_COLOR_HSB(220,33,42)  &rgb_ug RGB_TOG  &rgb_ug RGB_TOG                    &mmv MOVE_DOWN                   &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP    &kp END    &none               &kp INSERT
+                                                    &kp LEFT_GUI                      &mo 1                             &kp SPACE                                                                            &kp LG(SPACE)  &mo 2          &kp RIGHT_ALT
             >;
 
-            sensor-bindings = <&scroll_encoder>;
+            sensor-bindings = <&rgb_encoder>;
         };
 
         raise_layer {
             display-name = "SYMBOL";
             bindings = <
-&trans  &kp EXCL      &kp AT        &kp HASH   &kp DLLR   &kp PRCNT                            &mmv MOVE_UP                     &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC
-&trans  &bt BT_CLR    &mkp LCLK     &mkp MCLK  &mkp RCLK  &mkp MB4             &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT  &kp BSLH  &kp GRAVE
-&trans  &out OUT_USB  &out OUT_BLE  &none      &none      &mkp MB5   &trans                    &mmv MOVE_DOWN                   &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC  &kp PIPE  &kp TILDE
-                                    &trans     &trans     &kp SPACE                                                             &kp RET    &trans     &trans
+&kp TAB           &kp EXCL  &kp AT     &kp HASH       &kp DLLR   &kp PRCNT                               &mmv MOVE_UP                     &kp CARET      &kp AMPS   &kp ASTRK      &kp LPAR          &kp RPAR           &kp BSPC
+&kp LEFT_CONTROL  &mkp MB4  &mkp LCLK  &mkp MCLK      &mkp RCLK  &mkp MB5                &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp GRAVE      &kp MINUS  &kp PLUS       &kp LEFT_BRACE    &kp RIGHT_BRACE    &kp PIPE
+&kp LEFT_SHIFT    &none     &none      &none          &none      &none      &kp SPACE                    &mmv MOVE_DOWN                   &kp TILDE      &kp UNDER  &kp EQUAL      &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH
+                                       &kp LEFT_META  &mo 1      &kp SPACE                                                                &kp LG(SPACE)  &mo 2      &kp RIGHT_ALT
             >;
 
             sensor-bindings = <&scroll_encoder>;
@@ -103,13 +131,22 @@
         layer_3 {
             display-name = "Fn";
             bindings = <
-&studio_unlock  &kp F1      &kp F2     &kp F3       &kp F4     &kp F5                                  &mmv MOVE_UP                     &kp F6       &kp F7     &kp F8       &kp F9      &kp F10          &kp F11
-&trans          &trans      &mkp LCLK  &mkp MCLK    &mkp RCLK  &mkp MB4                &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &bootloader  &mkp LCLK  &mkp MCLK    &mkp RCLK   &kp PRINTSCREEN  &kp F12
-&trans          &sys_reset  &trans     &bootloader  &trans     &mkp MB5  &kp C_MUTE                    &mmv MOVE_DOWN                   &trans       &trans     &bootloader  &sys_reset  &kp SCROLLLOCK   &kp PAUSE_BREAK
-                                       &trans       &trans     &trans                                                                   &trans       &trans     &trans
+&caps_word        &kp LS(LG(NUMBER_1))  &kp LS(LG(NUMBER_2))  &kp LS(LG(NUMBER_3))  &kp LS(LG(NUMBER_4))  &kp LS(LG(N5))                               &mmv MOVE_UP                     &kp C_BRI_DEC  &kp C_BRI_INC  &kp K_MUTE     &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &key_repeat
+&sk LEFT_CONTROL  &kp F1                &kp F2                &kp F3                &kp F4                &kp F5                       &mmv MOVE_LEFT  &mkp LCLK       &mmv MOVE_RIGHT  &kp F6         &kp F7         &kp F8         &kp F9             &kp F10          &sk RIGHT_CONTROL
+&sk LEFT_SHIFT    &kp F11               &kp F12               &kp F13               &kp F14               &kp F15         &kp SPACE                    &mmv MOVE_DOWN                   &kp F16        &kp F17        &kp F18        &kp F19            &kp F20          &sk RIGHT_SHIFT
+                                                              &sk LEFT_GUI          &mo 1                 &kp SPACE                                                                     &kp LG(SPACE)  &mo 2          &sk RIGHT_ALT
             >;
 
             sensor-bindings = <&scroll_encoder>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        chageToLayer3 {
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 };
